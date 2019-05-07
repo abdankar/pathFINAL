@@ -288,8 +288,8 @@ class ViewController: UIViewController {
     //Gets Route
     func fetchRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) {
         let session = URLSession.shared
-        
-        let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=false&mode=driving&key=\(GoogleKey)"
+        //WALKING
+        let urlString = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=false&mode=walking&key=\(GoogleKey)"
         
         let url = URL(string: urlString)!
         
@@ -369,6 +369,7 @@ class ViewController: UIViewController {
                         searchLocations.append(midpointLocation)
                     }
                     //End block to maybe delete
+                    
                     //filtered array of coords
                     searchLocations.append(candidate)
                     currentReferenceLocation = candidate
@@ -383,7 +384,7 @@ class ViewController: UIViewController {
                 for location in searchLocations {
                     dispatchGroup.enter()
                     //use class GoogleDataProvider to search around our coordinates
-                    self.dataProvider.fetchPlacesNearCoordinate(location.coordinate, radius: DistanceFilter, type: self.currentSearchType) { places in
+                    self.dataProvider.fetchPlacesNearCoordinate(location.coordinate, radius: 75.0, type: self.currentSearchType) { places in
                         places.forEach {
                             // ignore places that have already been added
                             if !uniquePlaces.contains($0.placeId) {

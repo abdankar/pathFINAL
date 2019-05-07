@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
-let GoogleKey = "AIzaSyDQHPnXMRxd0axjuuLILXl-UvpN_2Hd2bc"
+let GoogleKey = "AIzaSyAvI9DmfHPX7ZvcnnokMuaJcwnpm_R9YDM"
 let DistanceFilter = 100.0
 // Set this to true, to deal with long straight lines
 // in the polyline data causing gaps in "Places"
