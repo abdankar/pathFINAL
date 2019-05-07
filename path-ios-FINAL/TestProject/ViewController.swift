@@ -227,7 +227,7 @@ class ViewController: UIViewController {
     }
     
     func cultureOn(){
-        currentSearchType = "culture"
+        currentSearchType = "bar"
         culture.layer.backgroundColor = myorange.cgColor;
         beerImage.image = UIImage(named: "beer");
         culture.layer.borderColor = myorange.cgColor;
