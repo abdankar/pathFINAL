@@ -60,49 +60,8 @@ class GoogleDataProvider {
             results.forEach {
                 let place = GooglePlace(dictionary: $0, acceptedTypes: [type])
                 placesArray.append(place)
-                if let reference = place.photoReference {
-                    self.fetchPhotoFromReference(reference) { image in
-                        place.photo = image
-                    }
-                }
             }
         }
         placesTask?.resume()
-    }
-    
-    
-    func fetchPhotoFromReference(_ reference: String, completion: @escaping PhotoCompletion) -> Void {
-        if let photo = photoCache[reference] {
-            completion(photo)
-        } else {
-            let urlString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=\(reference)&key=\(GoogleKey)"
-            guard let url = URL(string: urlString) else {
-                completion(nil)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            }
-            
-            session.downloadTask(with: url) { url, response, error in
-                var downloadedPhoto: UIImage? = nil
-                defer {
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                        completion(downloadedPhoto)
-                    }
-                }
-                guard let url = url else {
-                    return
-                }
-                guard let imageData = try? Data(contentsOf: url) else {
-                    return
-                }
-                downloadedPhoto = UIImage(data: imageData)
-                self.photoCache[reference] = downloadedPhoto
-                }
-                .resume()
-        }
     }
 }
