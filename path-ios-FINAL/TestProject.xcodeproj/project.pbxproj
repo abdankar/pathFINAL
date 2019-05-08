@@ -13,6 +13,7 @@
 		EA5767B9227A1DB200D0E245 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5767B8227A1DB200D0E245 /* PlaceMarker.swift */; };
 		EA5767BB227A1ECE00D0E245 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5767BA227A1ECE00D0E245 /* GooglePlace.swift */; };
 		EA5767BD227A1FE500D0E245 /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5767BC227A1FE500D0E245 /* GoogleDataProvider.swift */; };
+		EADE279F228327B30037A5A5 /* newlaunch.png in Resources */ = {isa = PBXBuildFile; fileRef = EADE279E228327B30037A5A5 /* newlaunch.png */; };
 		F6457BEF2278C3C600357F30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6457BEE2278C3C600357F30 /* AppDelegate.swift */; };
 		F6457BF12278C3C600357F30 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6457BF02278C3C600357F30 /* ViewController.swift */; };
 		F6457BF42278C3C600357F30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6457BF22278C3C600357F30 /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 		EA5767B8227A1DB200D0E245 /* PlaceMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
 		EA5767BA227A1ECE00D0E245 /* GooglePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
 		EA5767BC227A1FE500D0E245 /* GoogleDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
+		EADE279E228327B30037A5A5 /* newlaunch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newlaunch.png; sourceTree = "<group>"; };
 		F01D52CA617D21D56C1A1B96 /* Pods-TestProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-TestProjectUITests/Pods-TestProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F6457BEB2278C3C600357F30 /* TestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6457BEE2278C3C600357F30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		F6457BE22278C3C600357F30 = {
 			isa = PBXGroup;
 			children = (
+				EADE279E228327B30037A5A5 /* newlaunch.png */,
 				F6457BED2278C3C600357F30 /* TestProject */,
 				F6457C022278C3C700357F30 /* TestProjectTests */,
 				F6457C0D2278C3C700357F30 /* TestProjectUITests */,
@@ -284,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6457BF92278C3C700357F30 /* LaunchScreen.storyboard in Resources */,
+				EADE279F228327B30037A5A5 /* newlaunch.png in Resources */,
 				F6457BF62278C3C700357F30 /* Assets.xcassets in Resources */,
 				F6457BF42278C3C600357F30 /* Main.storyboard in Resources */,
 			);
