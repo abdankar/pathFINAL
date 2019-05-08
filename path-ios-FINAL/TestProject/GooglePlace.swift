@@ -11,6 +11,7 @@ import Foundation
 import CoreLocation
 import SwiftyJSON
 
+//Class that creates a GooglePlace object that parses json data
 class GooglePlace {
     
     let placeId : String
@@ -18,8 +19,6 @@ class GooglePlace {
     let address: String
     let coordinate: CLLocationCoordinate2D
     let placeType: String
-    var photoReference: String?
-    var photo: UIImage?
     
     init(dictionary: [String: Any], acceptedTypes: [String])
     {
@@ -32,11 +31,10 @@ class GooglePlace {
         let lng = json["geometry"]["location"]["lng"].doubleValue as CLLocationDegrees
         coordinate = CLLocationCoordinate2DMake(lat, lng)
         
-        photoReference = json["photos"][0]["photo_reference"].string
-        
         var foundType = "restaurant"
         let possibleTypes = acceptedTypes.count > 0 ? acceptedTypes : ["bakery", "bar", "cafe", "grocery_or_supermarket", "restaurant"]
         
+        //checks to see if types in json data contains one of the possibletypes we are looking for
         if let types = json["types"].arrayObject as? [String] {
             for type in types {
                 if possibleTypes.contains(type) {
