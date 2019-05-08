@@ -70,6 +70,8 @@ class ViewController: UIViewController {
         cafe.layer.borderWidth = 2;
         culture.layer.borderColor = UIColor.black.cgColor;
         culture.layer.borderWidth = 2;
+        restaurant.layer.borderColor = UIColor.black.cgColor;
+        restaurant.layer.borderWidth = 2;
         
         topView.layer.shadowColor = UIColor.black.cgColor
         topView.layer.shadowOpacity = 0.25
@@ -228,8 +230,6 @@ class ViewController: UIViewController {
         currentSearchType = "bar"
         culture.layer.backgroundColor = myorange.cgColor;
         beerImage.image = UIImage(named: "beer");
-        culture.layer.borderColor = myorange.cgColor;
-        culture.layer.borderWidth = 0;
         cultureText.textColor = UIColor.black;
     }
     
@@ -245,8 +245,6 @@ class ViewController: UIViewController {
         currentSearchType = "restaurant"
         restaurant.layer.backgroundColor = myorange.cgColor;
         forkImage.image = UIImage(named: "fork");
-        restaurant.layer.borderColor = myorange.cgColor;
-        restaurant.layer.borderWidth = 0;
         restaurantText.textColor = UIColor.black;
     }
     
@@ -262,8 +260,6 @@ class ViewController: UIViewController {
         currentSearchType = "cafe"
         cafe.layer.backgroundColor = myorange.cgColor;
         cafeImage.image = UIImage(named: "coffee-cup");
-        cafe.layer.borderColor = myorange.cgColor;
-        cafe.layer.borderWidth = 0;
         cafeText.textColor = UIColor.black;
     }
     
