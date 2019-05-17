@@ -93,14 +93,12 @@ class ViewController: UIViewController {
         endField.layer.borderWidth = 2
         //**********************************************
         
-        //For map
+        //map
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
 
-        //TODO: remove
-        startField.text = "201 E 2nd St, New York, NY 10009"
-        endField.text = "180 Orchard St, New York, NY 10002"
+        
     }
     
     //go pressed
@@ -338,7 +336,7 @@ class ViewController: UIViewController {
     //draws path on map... used in the fetchRoute method.
     func drawPath(from path: GMSPath) {
         let polyline = GMSPolyline(path: path)
-        polyline.strokeWidth = 5.0
+        polyline.strokeWidth = 10.0
         polyline.strokeColor = myorange
         polyline.map = mapView // Google MapView
     }
@@ -356,21 +354,6 @@ class ViewController: UIViewController {
                 //filters which coordinates we want by our constant DistanceFilter, lowering it will increase our API calls but give more businesses, a tradeoff
                 if distance > DistanceFilter || candidate == locations.last! {
                     print("Difference of ==> \(candidate.distance(from: currentReferenceLocation)) meters")
-                    //DELETE????????????
-                    // NOTE**: This block is optional, I am disabling it by default via the global variable
-                    // You can enable this and you will have less "gaps". However, if you do, you will make
-                    // more requests to the Google API; ideally it will still be less than the total
-                    // number of coordinates
-                    if FillInGaps && distance > (2 * DistanceFilter) {
-                        // When there are long straight lines, we may have differences much larger
-                        // than "DistanceFilter". This is because the polyline will only have
-                        // two points in the case of a straight line, even if it is 1km long.
-                        // We can determine a midpoint and add it to our searchLocations
-                        let midpointLocation = ViewController.midpointLocation(for: currentReferenceLocation, and: candidate)
-                        searchLocations.append(midpointLocation)
-                    }
-                    //End block to maybe delete
-                    
                     //filtered array of coords
                     searchLocations.append(candidate)
                     currentReferenceLocation = candidate
@@ -409,84 +392,26 @@ class ViewController: UIViewController {
 
 //CLLocationManagerDelegate
 extension ViewController: CLLocationManagerDelegate {
-    // 2
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        // 3
         guard status == .authorizedWhenInUse else {
             NSLog("Path needs permission to access your location")
             return
         }
-        // 4
         locationManager.startUpdatingLocation()
-        
-        //5
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
     }
-    
-    // 6
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
             return
         }
-        
-        // 7
         mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
-        
-        // 8
         locationManager.stopUpdatingLocation()
     }
 }
 
-extension ViewController {
-    // This extension helps find the midpoint between locations,
-    // note that this will only be an approximation for short distances
-    // TODO: this should probably go into a separate class
-    
-    //        /** Degrees to Radian **/
-    class func degreeToRadian(angle:CLLocationDegrees) -> CGFloat {
-        return (  (CGFloat(angle)) / 180.0 * .pi  )
-    }
-    
-    //        /** Radians to Degrees **/
-    class func radianToDegree(radian:CGFloat) -> CLLocationDegrees {
-        return CLLocationDegrees(  radian * CGFloat(180.0 / .pi)  )
-    }
-    
-    class func midpointLocation(for firstLocation: CLLocation, and secondLocation: CLLocation) -> CLLocation {
-        
-        var x = 0.0 as CGFloat
-        var y = 0.0 as CGFloat
-        var z = 0.0 as CGFloat
-        
-        let listCoords = [
-            CLLocationCoordinate2D(latitude: firstLocation.coordinate.latitude, longitude: firstLocation.coordinate.longitude),
-            CLLocationCoordinate2D(latitude: secondLocation.coordinate.latitude, longitude: secondLocation.coordinate.longitude)
-        ]
-        
-        for coordinate in listCoords{
-            let lat:CGFloat = degreeToRadian(angle: coordinate.latitude)
-            let lon:CGFloat = degreeToRadian(angle: coordinate.longitude)
-            x = x + cos(lat) * cos(lon)
-            y = y + cos(lat) * sin(lon)
-            z = z + sin(lat)
-        }
-        
-        x = x/CGFloat(listCoords.count)
-        y = y/CGFloat(listCoords.count)
-        z = z/CGFloat(listCoords.count)
-        
-        let resultLon: CGFloat = atan2(y, x)
-        let resultHyp: CGFloat = sqrt(x*x+y*y)
-        let resultLat:CGFloat = atan2(z, resultHyp)
-        
-        let newLat = radianToDegree(radian: resultLat)
-        let newLon = radianToDegree(radian: resultLon)
-        let result : CLLocation = CLLocation(latitude: newLat, longitude: newLon)
-        
-        return result
-        
-    }
-}
+
+
 
 
