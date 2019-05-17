@@ -11,7 +11,6 @@ import Foundation
 import CoreLocation
 import SwiftyJSON
 
-//Class that creates a GooglePlace object that parses json data
 class GooglePlace {
     
     let placeId : String
@@ -19,6 +18,12 @@ class GooglePlace {
     let address: String
     let coordinate: CLLocationCoordinate2D
     let placeType: String
+    let priceLevel : Int?
+    let rating : Double?
+    let openNow: Bool
+    var photoReference: String?
+    var photo: UIImage?
+    let formattedAddress: String
     
     init(dictionary: [String: Any], acceptedTypes: [String])
     {
@@ -26,15 +31,25 @@ class GooglePlace {
         placeId = json["place_id"].stringValue
         name = json["name"].stringValue
         address = json["vicinity"].stringValue
+        openNow = json["open_now"].boolValue
+        if(openNow){
+            NSLog("Yes")
+        }
+        NSLog("Open now %", openNow)
+        formattedAddress = json["address_components"][2]["long_name"].stringValue;
+        NSLog("formatted Address %@", formattedAddress)
         
+        priceLevel = json["price_level"].int
+        rating = json["rating"].double
         let lat = json["geometry"]["location"]["lat"].doubleValue as CLLocationDegrees
         let lng = json["geometry"]["location"]["lng"].doubleValue as CLLocationDegrees
         coordinate = CLLocationCoordinate2DMake(lat, lng)
         
-        var foundType = "restaurant"
-        let possibleTypes = acceptedTypes.count > 0 ? acceptedTypes : ["bakery", "bar", "cafe", "grocery_or_supermarket", "restaurant"]
+        photoReference = json["photos"][0]["photo_reference"].string
         
-        //checks to see if types in json data contains one of the possibletypes we are looking for
+        var foundType = "restaurant"
+        let possibleTypes = acceptedTypes.count > 0 ? acceptedTypes : ["bakery", "bar", "cafe", "restaurant"]
+        
         if let types = json["types"].arrayObject as? [String] {
             for type in types {
                 if possibleTypes.contains(type) {

@@ -23,6 +23,7 @@ class PlaceMarker: GMSMarker {
         icon = UIImage(named: place.placeType+"_pin")
         //pick a new pin img
         groundAnchor = CGPoint(x: 0.5, y: 1)
+        
         appearAnimation = .pop
     }
 }
